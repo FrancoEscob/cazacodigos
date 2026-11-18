@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+capturas/
+codigos.log
+muestras/*.ts
+muestras/*.log
+muestras/captura1.png

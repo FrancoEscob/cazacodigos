@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Canje de prueba</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #14161a; color: #e8e8e8; display: grid; place-items: center; min-height: 100vh; margin: 0; }
+  main { width: min(520px, 90vw); }
+  input { width: 100%; box-sizing: border-box; font: 600 22px ui-monospace, monospace; padding: 14px; border-radius: 8px; border: 2px solid #4a90e2; background: #0c0d10; color: #fff; }
+  #estado { margin-top: 18px; padding: 14px; border-radius: 8px; background: #1e2127; min-height: 3em; white-space: pre-wrap; }
+  .ok { outline: 2px solid #3ddc84; }
+  small { color: #9aa0a6; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Canje de prueba</h1>
+  <p><small>Página de mentira para probar que el programa pega el código donde debe. No canjea nada.</small></p>
+  <form id="f"><input id="codigo" autocomplete="off" autofocus placeholder="Dejá el cursor acá"></form>
+  <div id="estado">Esperando…</div>
+</main>
+<script>
+  const campo = document.getElementById('codigo'), estado = document.getElementById('estado');
+  const hora = () => new Date().toLocaleTimeString('es', { hour12: false }) + '.' + String(new Date().getMilliseconds()).padStart(3, '0');
+  let pegado = '';
+  campo.addEventListener('input', () => { pegado = hora(); estado.className = ''; estado.textContent = `Recibí: ${campo.value}\n(${campo.value.length} caracteres, ${pegado})`; });
+  document.getElementById('f').addEventListener('submit', e => {
+    e.preventDefault();
+    estado.className = 'ok';
+    estado.textContent = `ENVIADO: ${campo.value}\n(${campo.value.length} caracteres)\npegado ${pegado} · enter ${hora()}`;
+    document.title = 'Canje de prueba · ENVIADO ' + campo.value;
+  });
+  window.addEventListener('focus', () => campo.focus());
+</script>
+</body>
+</html>
